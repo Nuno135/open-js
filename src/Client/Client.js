@@ -1,14 +1,26 @@
 'use strict';
 
 const EventEmitter = require('events').EventEmitter;
+const ClientManager = require('./ClientManager');
+const WebSocketManager = require('./websocket/WebSocketManager');
 
 class Client extends EventEmitter {
-    constructor(token, options) {
+    constructor(options = {}) {
         super();
-        
-        this.options = options;
+           this.manager = new ClientManager(this);
 
-        this.token = token; 
+           this.ws = new WebSocketManager(this);
+        // Gonna add more stuff here later
+    }
+    
+    login(token) {
+          return new Promise((resolve, reject) => {
+          if (!token || typeof token !== 'string') throw new Error('TOKEN_INVALID');
+          this.manager.connectToWebSocket(token, resolve, reject);
+        }).catch(e => {
+          this.destroy();
+          return Promise.reject(e);
+        });
     }
 };
 
