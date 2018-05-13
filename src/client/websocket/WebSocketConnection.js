@@ -4,7 +4,6 @@ const { Status, Events } = require('../../utils/Constants');
 
 class WebSocketConnection extends EventEmitter {
   constructor(manager, gateway) {
-    
     this.manager = manager;
     
     this.gateway = gateway;
