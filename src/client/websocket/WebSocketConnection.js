@@ -17,6 +17,7 @@ class WebSocketConnection extends EventEmitter {
     
     this.status = Status.IDLE;
   }
+  
   ready() {
     if (this.status === Status.READY) {
       this.debug('I\'m already ready.');
