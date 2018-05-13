@@ -10,7 +10,7 @@ class WebSocketManager extends EventEmitter {
     }
     
     debug(message) {
-        this.client.emit(Events.DEBUG, message);   
+        return this.client.emit(Events.DEBUG, message);   
     }
     
     connect(gateway) {
