@@ -1,5 +1,3 @@
-'use strict';
-
 const EventEmitter = require('events').EventEmitter;
 const ClientManager = require('./ClientManager');
 const WebSocketManager = require('./websocket/WebSocketManager');
@@ -10,7 +8,14 @@ class Client extends EventEmitter {
            this.manager = new ClientManager(this);
 
            this.ws = new WebSocketManager(this);
+        
+           this.readyAt = null;
+        
         // Gonna add more stuff here later
+    }
+    
+    get uptime() {
+        return this.readyAt ? Date.now() - this.readyAt : null;    
     }
     
     login(token) {
