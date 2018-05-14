@@ -27,6 +27,16 @@ class WebSocketConnection extends EventEmitter {
     }
   }
   
+  readyCheck() {
+    if (this.status !== Status.READY) {
+      ready();
+      return false;
+    } else
+    if (this.status === Status.READY) {
+      return true;
+    }
+  }
+  
   debug(message) {
     return this.manager.debug(`CON: ${message}`);
   }
